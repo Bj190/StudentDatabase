@@ -8,12 +8,14 @@ import kotlin.jvm.JvmRecord as JvmRecord1
 
 data class Student(val firstName: String, val  lastName: String, val Age: Int, val courseName: String, val courseModule: Int)
 fun record() {
+
     //@JvmRecord1
     val file = Paths.get("StudentDatabase.txt")
     var studentlines = Files.readAllLines(file)
     "$studentlines"
         .trim(' ')
         .split(",")
+        .map {Student([0],[1],[2],[3])}
         .forEach {println(it)}
         //sperate by comma
         //trim

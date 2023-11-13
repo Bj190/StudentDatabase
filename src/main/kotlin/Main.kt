@@ -6,5 +6,5 @@ fun main(args: Array<String>) {
 
 
     sort()
-    menu()
+
 }

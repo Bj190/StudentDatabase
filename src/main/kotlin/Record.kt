@@ -7,7 +7,7 @@ import java.nio.file.Paths
 
 
 fun record() {
-    //data class Student(val firstName: String, val  lastName: String, val Age: Int, val courseName: String, val courseModule: String){}
+    data class Student(val firstName: String, val  lastName: String, val Age: Int, val courseName: String, val courseModule: String){}
     val file = Paths.get("StudentDatabase.txt")
     var studentlines = Files.readAllLines(file)
     studentlines

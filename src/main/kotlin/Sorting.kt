@@ -1,16 +1,16 @@
-import java.nio.file.Files
-import java.nio.file.Paths
+
 import java.util.*
+
 
 fun sort() {
     val scanner = Scanner(System.`in`)
     var queryIsOn = true
     var output = ""
 
-    val file = Paths.get("StudentDatabase.txt")
-    var studentlines = Files.readAllLines(file)
-    studentlines
-        .forEach {println(it)}
+    record()
+    //studentLines
+        //.sort
+
 
 
     // week 5 hang man example insipration

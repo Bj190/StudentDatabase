@@ -1,0 +1,20 @@
+John, Smith, 20, Computer Science, 101
+Sarah, Johnson, 21, Mathematics, 201
+Michael, Brown, 19, Biology, 301
+Emily, Wilson, 22, Computer Science, 101
+David, Lee, 20, History, 401
+Jessica, Davis, 21, Mathematics, 201
+Daniel, Anderson, 19, Biology, 301
+Olivia, Martinez, 22, Computer Science, 101
+James, Rodriguez, 20, History, 401
+Emma, Taylor, 21, Mathematics, 201
+William, Wilson, 19, Biology, 301
+Ava, Harris, 22, Computer Science, 101
+Benjamin, Thomas, 20, History, 401
+Sophia, White, 21, Mathematics, 201
+Christopher, Clark, 19, Biology, 301
+Mia, Lewis, 22, Computer Science, 101
+Ethan, Walker, 20, History, 401
+Isabella, Hall, 21, Mathematics, 201
+Joseph, Green, 19, Biology, 301
+Charlotte, Baker, 22, Computer Science, 101

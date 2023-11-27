@@ -8,36 +8,24 @@ import javafx.scene.text.Font;
 
 public class TimetableView extends Parent {
 
-    private TimetableModel model = new TimetableModel();
-    private ListView<TimetableEvent> listView = new ListView<>();
+    private ListView<Student> listView = new ListView<>();
 
     public TimetableView() {
+
         listView.setPrefSize(300, 600);
 
         var btn = new CompoundButton(
-                "Events for user",
+                "Get Students",
                 400, 50
         );
         btn.setOnAction(() -> {
             var userName = btn.textField.getText();
-            var events = model.getEventsForUser(userName);
-            listView.setItems(FXCollections.observableList(events));
-        });
-
-        var btn2 = new CompoundButton(
-                "Events for room",
-                400, 250
-        );
-        btn2.setOnAction(() -> {
-            var roomName = btn2.textField.getText();
-            var events = model.getEventsInRoom(roomName);
-            listView.setItems(FXCollections.observableList(events));
+            var studentsList = //needs to be the action when pressing get students so it should show the students
         });
 
         getChildren().addAll(
                 listView,
-                btn,
-                btn2
+                btn
         );
     }
 

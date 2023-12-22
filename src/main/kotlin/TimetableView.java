@@ -1,4 +1,5 @@
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -6,26 +7,43 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
+
 public class TimetableView extends Parent {
 
-    private ListView<Student> listView = new ListView<>();
+
+    private final ListView<Student> listView = new ListView<>();
+    ObservableList<String> Student = FXCollections.observableArrayList(StudentRecordKt.Student);
 
     public TimetableView() {
 
         listView.setPrefSize(300, 600);
 
         var btn = new CompoundButton(
+                "Compile Records",
+                400, 150
+                );
+
+        var btn2 = new CompoundButton(
                 "Get Students",
-                400, 50
+                400, 350
         );
+
+
         btn.setOnAction(() -> {
-            var userName = btn.textField.getText();
-            var studentsList = //needs to be the action when pressing get students so it should show the students
+
+            StudentRecordKt.recordStudent();
+            listView.setItems(Student);
+        });
+        btn2.setOnAction(() -> {
+        var studentNames = btn2.textField.getText();
+        var studentNamesDatabase = //getStudentFirstNames(studentNames);
+        listView.setItems(FXCollections.observerableList(studentNamesDatabase));
         });
 
         getChildren().addAll(
                 listView,
-                btn
+                btn,
+                btn2
         );
     }
 

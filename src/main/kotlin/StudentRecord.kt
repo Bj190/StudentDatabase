@@ -5,7 +5,7 @@ import java.nio.file.Paths
 //need to inisliase record then it codes data properly with group by so it's sperated into String etc then it can be used for inputs and scanners
 // ins -> data/groupby -> instructions to use
 data class Student(val firstName: String, val  lastName: String, val age: Int, val courseName: String, val courseModule: Int)
-fun record() {
+fun recordStudent() {
 
     //@JvmRecord1
     val file = Paths.get("StudentDatabase.txt")
@@ -18,8 +18,9 @@ fun record() {
 
     //trim and split after mapping
 
+    //fun getStudentFNForUser(firstName: String): List<recordStudent>{
+    //return recordStudent.filter {it.firstName = firstName}
+    //}
 
 }
-fun getStudentsFirstName(FName: String): List<Student> {
-    return Student.filter {it.firstName == FName}
-}
+

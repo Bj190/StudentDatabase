@@ -7,12 +7,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
+import java.util.List;
+
 
 public class TimetableView extends Parent {
 
 
     private final ListView<Student> listView = new ListView<>();
-    ObservableList<String> Student = FXCollections.observableArrayList(StudentRecordKt.Student);
+
 
     public TimetableView() {
 
@@ -22,22 +24,21 @@ public class TimetableView extends Parent {
                 "Compile Records",
                 400, 150
                 );
-
         var btn2 = new CompoundButton(
-                "Get Students",
-                400, 350
+                "Compile Records",
+                400, 450
         );
 
 
         btn.setOnAction(() -> {
+            List<Student> students = StudentRecordKt.recordStudent();
+            listView.setItems(FXCollections.observableList(StudentRecordKt.getStudent()));
 
-            StudentRecordKt.recordStudent();
-            listView.setItems(Student);
+            //StudentRecordKt.recordStudent();
+            //listView.setItems(FXCollections.observableList(Student));
         });
         btn2.setOnAction(() -> {
-        var studentNames = btn2.textField.getText();
-        var studentNamesDatabase = //getStudentFirstNames(studentNames);
-        listView.setItems(FXCollections.observerableList(studentNamesDatabase));
+        listView.setItems(FXCollections.observableList(StudentRecordKt.getfirstNames()));
         });
 
         getChildren().addAll(

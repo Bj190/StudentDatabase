@@ -29,7 +29,7 @@ public class TimetableView extends Parent {
                 400, 450
         );
 
-
+        //this returns a complied record
         btn.setOnAction(() -> {
             List<Student> students = StudentRecordKt.recordStudent();
             listView.setItems(FXCollections.observableList(StudentRecordKt.getStudent()));
@@ -37,8 +37,11 @@ public class TimetableView extends Parent {
             //StudentRecordKt.recordStudent();
             //listView.setItems(FXCollections.observableList(Student));
         });
+        //this searchs thrrough the firstnames and returns the record that has the first name
         btn2.setOnAction(() -> {
-        listView.setItems(FXCollections.observableList(StudentRecordKt.getfirstNames()));
+            var Names = btn2.textField.getText();
+            var firstNames = StudentRecordKt.getfirstNames(Names);
+        listView.setItems(FXCollections.observableList(firstNames));
         });
 
         getChildren().addAll(

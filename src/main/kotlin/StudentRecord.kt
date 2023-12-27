@@ -20,9 +20,8 @@ fun getStudent(): List<Student> {
     students = recordStudent()
     return students
 }
-fun getfirstNames(): List<Student> {
-    students = recordStudent()
-    return students
+fun getfirstNames(firstName: String): List<Student> {
+    return students.filter {it.firstName == firstName }
 }
 
 

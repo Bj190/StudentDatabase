@@ -26,5 +26,14 @@ fun getfirstNames(firstName: String): List<Student> {
 fun getlastNames(lastName: String): List<Student> {
     return students.filter{it.lastName == lastName}
 }
+fun getAge(age: Int): List<Student> {
+    return students.filter{it.age == age}
+}
+fun getCourseName(courseName: String): List<Student>{
+    return students.filter {it.courseName == courseName}
+}
+fun getCourseModule(courseModule: Int): List<Student>{
+    return students.filter{it.courseModule == courseModule}
+}
 
 

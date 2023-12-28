@@ -32,6 +32,18 @@ public class TimetableView extends Parent {
                 "Search by Last Names",
                 400, 550
         );
+        var btn4 = new CompoundButton(
+                "Search by Age",
+                400, 750
+        );
+        var btn5 = new CompoundButton(
+                "Search by Course Name",
+                400, 950
+        );
+        var btn6 = new CompoundButton(
+                "Search by Course Module",
+                400, 1150
+        );
 
         //this returns a complied record
         btn.setOnAction(() -> {
@@ -43,21 +55,39 @@ public class TimetableView extends Parent {
         });
         //this searchs thrrough the firstnames and returns the record that has the first name
         btn2.setOnAction(() -> {
-            var Names1 = btn2.textField.getText();
-            var firstNames = StudentRecordKt.getfirstNames(Names1);
+            var btnFNames = btn2.textField.getText();
+            var firstNames = StudentRecordKt.getfirstNames(btnFNames);
         listView.setItems(FXCollections.observableList(firstNames));
         });
+        //recheck the guidelines for good variable names
         btn3.setOnAction(() -> {
-            var Names2 = btn3.textField.getText();
-            var lastNames = StudentRecordKt.getlastNames(Names2);
+            var btnLNames = btn3.textField.getText();
+            var lastNames = StudentRecordKt.getlastNames(btnLNames);
             listView.setItems(FXCollections.observableList(lastNames));
         });
+        btn4.setOnAction(() -> {
+            var btnAge = btn4.textField.getText();  //needs to be an int getText expects a String
+            var ages = StudentRecordKt.getAge(btnAge);
+            listView.setItems(FXCollections.observableList(ages));
+        });
+        btn5.setOnAction(() -> {
+            var btnCName = btn3.textField.getText();
+            var courseName = StudentRecordKt.getlastNames(btnCName);
+            listView.setItems(FXCollections.observableList(courseName));
+        });
+        btn6.setOnAction(() -> {
+            var btnCModule = btn3.textField.getText(); //needs to be an int getText expects a String
+            var courseModule = StudentRecordKt.getlastNames(btnCModule);
+            listView.setItems(FXCollections.observableList(courseModule));
+        });
+
 
         getChildren().addAll(
                 listView,
                 btn,
                 btn2,
-                btn3
+                btn3,
+                btn4
         );
     }
 

@@ -44,40 +44,41 @@ public class TimetableView extends Parent {
                 "Search by Course Module",
                 400, 1150
         );
-
-        //this returns a complied record
+        //recheck the guidelines for good variable names
+        //Upon Starting press this button to compile database into a record.
         btn.setOnAction(() -> {
             List<Student> students = StudentRecordKt.recordStudent();
             listView.setItems(FXCollections.observableList(StudentRecordKt.getStudent()));
-
-            //StudentRecordKt.recordStudent();
-            //listView.setItems(FXCollections.observableList(Student));
         });
-        //this searchs thrrough the firstnames and returns the record that has the first name
+        //this searches through the first names and returns the record that matches input
         btn2.setOnAction(() -> {
             var btnFNames = btn2.textField.getText();
             var firstNames = StudentRecordKt.getfirstNames(btnFNames);
         listView.setItems(FXCollections.observableList(firstNames));
         });
-        //recheck the guidelines for good variable names
+        //this searches through the last names and returns the record that matches input
         btn3.setOnAction(() -> {
             var btnLNames = btn3.textField.getText();
             var lastNames = StudentRecordKt.getlastNames(btnLNames);
             listView.setItems(FXCollections.observableList(lastNames));
         });
+        //this searches through the ages and returns the record that matches input
+        //Some way to only allow ints to be accepted?
         btn4.setOnAction(() -> {
-            var btnAge = btn4.textField.getText();  //needs to be an int getText expects a String
+            var btnAge = Integer.parseInt(btn4.textField.getText()); //Int Expected
             var ages = StudentRecordKt.getAge(btnAge);
             listView.setItems(FXCollections.observableList(ages));
         });
+        //this searches through the course names and returns the record that matches input
         btn5.setOnAction(() -> {
-            var btnCName = btn3.textField.getText();
-            var courseName = StudentRecordKt.getlastNames(btnCName);
+            var btnCName = btn4.textField.getText();
+            var courseName = StudentRecordKt.getCourseName(btnCName);
             listView.setItems(FXCollections.observableList(courseName));
         });
+        //this searches through the course module number and returns the record that matches input
         btn6.setOnAction(() -> {
-            var btnCModule = btn3.textField.getText(); //needs to be an int getText expects a String
-            var courseModule = StudentRecordKt.getlastNames(btnCModule);
+            var btnCModule = Integer.parseInt(btn6.textField.getText()); //Int Expected
+            var courseModule = StudentRecordKt.getCourseModule(btnCModule);
             listView.setItems(FXCollections.observableList(courseModule));
         });
 
@@ -87,7 +88,9 @@ public class TimetableView extends Parent {
                 btn,
                 btn2,
                 btn3,
-                btn4
+                btn4,
+                btn5,
+                btn6
         );
     }
 

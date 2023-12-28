@@ -4,7 +4,7 @@ Michael, Brown, 19, Biology, 301
 Emily, Wilson, 22, Computer Science, 101
 David, Lee, 20, History, 401
 Jessica, Davis, 21, Mathematics, 201
-Daniel, Anderson, 19, Biology, 301
+Daniel, Davis, 19, Biology, 301
 Olivia, Martinez, 22, Computer Science, 101
 James, Rodriguez, 20, History, 401
 Emma, Taylor, 21, Mathematics, 201

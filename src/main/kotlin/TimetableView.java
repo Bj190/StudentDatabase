@@ -25,8 +25,12 @@ public class TimetableView extends Parent {
                 400, 150
                 );
         var btn2 = new CompoundButton(
-                "Compile Records",
-                400, 450
+                "Search by First Names",
+                400, 350
+        );
+        var btn3 = new CompoundButton(
+                "Search by Last Names",
+                400, 550
         );
 
         //this returns a complied record
@@ -39,15 +43,21 @@ public class TimetableView extends Parent {
         });
         //this searchs thrrough the firstnames and returns the record that has the first name
         btn2.setOnAction(() -> {
-            var Names = btn2.textField.getText();
-            var firstNames = StudentRecordKt.getfirstNames(Names);
+            var Names1 = btn2.textField.getText();
+            var firstNames = StudentRecordKt.getfirstNames(Names1);
         listView.setItems(FXCollections.observableList(firstNames));
+        });
+        btn3.setOnAction(() -> {
+            var Names2 = btn3.textField.getText();
+            var lastNames = StudentRecordKt.getlastNames(Names2);
+            listView.setItems(FXCollections.observableList(lastNames));
         });
 
         getChildren().addAll(
                 listView,
                 btn,
-                btn2
+                btn2,
+                btn3
         );
     }
 

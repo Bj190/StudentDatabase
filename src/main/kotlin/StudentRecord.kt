@@ -23,5 +23,8 @@ fun getStudent(): List<Student> {
 fun getfirstNames(firstName: String): List<Student> {
     return students.filter {it.firstName == firstName }
 }
+fun getlastNames(lastName: String): List<Student> {
+    return students.filter{it.lastName == lastName}
+}
 
 

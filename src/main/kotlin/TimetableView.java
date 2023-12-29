@@ -1,8 +1,11 @@
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Orientation;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -22,28 +25,38 @@ public class TimetableView extends Parent {
 
         var btn = new CompoundButton(
                 "Compile Records",
-                400, 150
+                400, 50
                 );
         var btn2 = new CompoundButton(
                 "Search by First Names",
-                400, 350
+                400, 200
         );
         var btn3 = new CompoundButton(
                 "Search by Last Names",
-                400, 550
+                400, 350
         );
         var btn4 = new CompoundButton(
                 "Search by Age",
-                400, 750
+                400, 500
         );
         var btn5 = new CompoundButton(
                 "Search by Course Name",
-                400, 950
+                400, 650
         );
         var btn6 = new CompoundButton(
                 "Search by Course Module",
-                400, 1150
+                400, 800
         );
+        //var Scroll = new Scrollbar();
+
+
+        //var sortingBtn = new CompoundButton(
+                //"Sort by age",
+                //400, 0
+        //);
+
+
+
         //recheck the guidelines for good variable names
         //Upon Starting press this button to compile database into a record.
         btn.setOnAction(() -> {
@@ -71,7 +84,7 @@ public class TimetableView extends Parent {
         });
         //this searches through the course names and returns the record that matches input
         btn5.setOnAction(() -> {
-            var btnCName = btn4.textField.getText();
+            var btnCName = btn5.textField.getText();
             var courseName = StudentRecordKt.getCourseName(btnCName);
             listView.setItems(FXCollections.observableList(courseName));
         });
@@ -81,6 +94,13 @@ public class TimetableView extends Parent {
             var courseModule = StudentRecordKt.getCourseModule(btnCModule);
             listView.setItems(FXCollections.observableList(courseModule));
         });
+       //sortingBtn.setOnAction(() -> {
+            //right idea wrong logic
+            //listView.getItems().set() //this is not proper. This is a work around It complies a new record but sorted.
+            //first step
+            //This needs to sort by age(oldest to youngest)
+            //prerequists: record needs to be complied. ListView must contain entries.
+        //});
 
 
         getChildren().addAll(
@@ -91,6 +111,8 @@ public class TimetableView extends Parent {
                 btn4,
                 btn5,
                 btn6
+                //Scroll
+                //sortingBtn
         );
     }
 

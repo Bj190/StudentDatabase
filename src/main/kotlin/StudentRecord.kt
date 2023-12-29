@@ -1,6 +1,9 @@
 import java.nio.file.Files
 import java.nio.file.Paths
 
+// @Author Bryn Jones 2023
+// Version 1.0
+
 
 //need to inisliase record then it codes data properly with group by so it's sperated into String etc then it can be used for inputs and scanners
 // ins -> data/groupby -> instructions to use

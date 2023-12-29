@@ -5,6 +5,9 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.control.ScrollPane;
 
+// @Author Bryn Jones 2023
+// Version 1.0
+
 import java.awt.*;
 
 public class View extends Application {
@@ -22,9 +25,9 @@ public class View extends Application {
         stage.setHeight(screen.getHeight()); //this is not suitable for different screens //maybe get width and height of screen then divide?
         stage.setWidth(screen.getWidth()); // trying to get the screen resolution of the whichever device it loads and then adjust it
         //this section to be tested on different screen types. Use University Computers
-        stage.setX(screen.getMinX()); //+ (screen.getWidth() - stage.getWidth())); //new
-        stage.setY(screen.getMinY());//+ (screen.getHeight() - stage.getHeight())); //new
-        //scroll pane Code: sp.setContent(View)?
+        stage.setX(screen.getMinX() + (screen.getWidth() - stage.getWidth()) / 2); //new
+        stage.setY(screen.getMinY() + (screen.getHeight() - stage.getHeight()) / 2); //new
+
 
         stage.hide();
         stage.show();

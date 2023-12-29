@@ -12,6 +12,9 @@ import javafx.scene.text.Font;
 
 import java.util.List;
 
+// @Author Bryn Jones 2023
+// Version 1.0
+
 
 public class TimetableView extends Parent {
 
@@ -47,8 +50,6 @@ public class TimetableView extends Parent {
                 "Search by Course Module",
                 400, 800
         );
-        //var Scroll = new Scrollbar();
-
 
         //var sortingBtn = new CompoundButton(
                 //"Sort by age",
@@ -111,7 +112,6 @@ public class TimetableView extends Parent {
                 btn4,
                 btn5,
                 btn6
-                //Scroll
                 //sortingBtn
         );
     }

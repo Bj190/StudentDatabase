@@ -9,7 +9,7 @@ import java.nio.file.Paths
 // ins -> data/groupby -> instructions to use
 data class Student(val firstName: String, val  lastName: String, val age: Int, val courseName: String, val courseModule: Int)
 fun recordStudent(): List<Student>{
-
+    //This will read the file then if the data is stored correctly will read it and then convert into a record for the software to manipulate
     //@JvmRecord1
     val file = Paths.get("StudentDatabase.txt")
     val studentLines = Files.readAllLines(file)
@@ -37,6 +37,9 @@ fun getCourseName(courseName: String): List<Student>{
 }
 fun getCourseModule(courseModule: Int): List<Student>{
     return students.filter{it.courseModule == courseModule}
+}
+fun getCombinedNames(firstName: String, lastName: String): List<Student>{
+    return students.filter{it.firstName == firstName, it.lastName == lastName}; //bipedicate
 }
 
 

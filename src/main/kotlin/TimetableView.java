@@ -4,13 +4,22 @@ import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // @Author Bryn Jones 2023
 // Version 1.0
@@ -25,6 +34,9 @@ public class TimetableView extends Parent {
     public TimetableView() {
 
         listView.setPrefSize(300, 600);
+        Map<String,Runnable> actions = new HashMap<>();
+        TextField textField = new TextField();
+
 
         var btn = new CompoundButton(
                 "Compile Records",
@@ -56,6 +68,15 @@ public class TimetableView extends Parent {
                 //400, 0
         //);
 
+        var Dmenu = new Dropdown(
+                "Search By", 800, 50, actions
+        );
+        Runnable getFirstNamesAction = () -> {
+            var btnFNames = textField.getText();
+            var firstNames = StudentRecordKt.getfirstNames(btnFNames);
+            listView.setItems(FXCollections.observableList(firstNames));
+        };
+        actions.put("First Name", getFirstNamesAction);
 
 
         //recheck the guidelines for good variable names
@@ -70,6 +91,7 @@ public class TimetableView extends Parent {
             var firstNames = StudentRecordKt.getfirstNames(btnFNames);
         listView.setItems(FXCollections.observableList(firstNames));
         });
+
         //this searches through the last names and returns the record that matches input
         btn3.setOnAction(() -> {
             var btnLNames = btn3.textField.getText();
@@ -111,7 +133,8 @@ public class TimetableView extends Parent {
                 btn3,
                 btn4,
                 btn5,
-                btn6
+                btn6,
+                Dmenu
                 //sortingBtn
         );
     }
@@ -136,4 +159,52 @@ public class TimetableView extends Parent {
             btn.setOnAction(e -> action.run());
         }
     }
+
+    //using the skeleton of the compound button and research combined both to create an improvement
+    //this for some reason isn't adding to the stage and javafx application
+    //realisation didn't need panel or frame as that creates an enterily different window when i want this added to the stage
+    //so reordered code and deleted parts
+    private static class Dropdown extends VBox {
+        private ComboBox<String> dropdownMenu = new ComboBox<>();
+        private Button btn = new Button();
+        private TextField textField;
+        String[] options = {"First Name", "Last Name", "Age", "Course Name", "Course Module"};
+        private Map<String, Runnable> actions;
+
+
+
+
+        Dropdown(String name, int x, int y, Map<String, Runnable> actions){
+            this.actions = actions;
+            dropdownMenu.getItems().addAll(options);
+
+
+
+            //really not sure on the logic of this one
+            //basically needs to check options then depending on which option they choose it needs to run the corresponding function
+            //start over basically the runnable needs to be in dropdownMenu but to interact with the listview it needs to be defined as it is in the btns
+            // e.g if options is "First Name" then run function getFirstName
+            dropdownMenu.setOnAction((event) -> {
+                String theOption = dropdownMenu.getSelectionModel().getSelectedItem();
+                Runnable action = actions.get(theOption);
+                if (action != null) {
+                    action.run();
+                }
+            });
+            btn.setFont(Font.font(34));
+            btn.setText(name);
+            setTranslateX(x);
+            setTranslateY(y);
+
+            textField.setFont(Font.font(34));
+
+            getChildren().addAll(btn, textField,dropdownMenu);
+        }
+        interface Action {
+            void run();
+        }
+
+
+    }
+
 }

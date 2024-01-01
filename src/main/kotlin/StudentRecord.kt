@@ -38,8 +38,8 @@ fun getCourseName(courseName: String): List<Student>{
 fun getCourseModule(courseModule: Int): List<Student>{
     return students.filter{it.courseModule == courseModule}
 }
-fun getCombinedNames(firstName: String, lastName: String): List<Student>{
-    return students.filter{it.firstName == firstName, it.lastName == lastName}; //bipedicate
-}
+//fun getCombinedNames(firstName: String, lastName: String): List<Student>{
+    //return students.filter{it.firstName == firstName, it.lastName == lastName}; //bipedicate
+//}
 
 

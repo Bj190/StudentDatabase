@@ -78,6 +78,9 @@ public class TimetableView extends Parent {
         var writebtn = new CompoundButton(
                 "Add new Student", 800, 200
         );
+        var IDbtn = new CompoundButton(
+                "Search By ID", 400, 950
+        );
 
 
 
@@ -124,6 +127,12 @@ public class TimetableView extends Parent {
             var courseModule = StudentRecordKt.getCourseModule(btnCModule);
             listView.setItems(FXCollections.observableList(courseModule));
         });
+        //This searches through the IDs and returns matches
+        IDbtn.setOnAction(() -> {
+            var btnID = Integer.parseInt(IDbtn.textField.getText()); //Int Expected
+            var ID = StudentRecordKt.getID(btnID);
+            listView.setItems(FXCollections.observableList(ID));
+        });
         btn7.setOnAction(() -> {
             var btnCNames = btn7.textField.getText().split(" ");
             var firstName = btnCNames[0];
@@ -135,13 +144,14 @@ public class TimetableView extends Parent {
             String input = textField.getText();
 
             String[] parts = input.replace(" ", "").split(",");
-            String firstName = parts[0];
-            String lastName = parts[1];
-            int age = Integer.parseInt(parts[2]);
-            String courseName = parts[3];
-            int courseModule = Integer.parseInt(parts[4]);
+            int ID = Integer.parseInt(parts[0]);
+            String firstName = parts[1];
+            String lastName = parts[2];
+            int age = Integer.parseInt(parts[3]);
+            String courseName = parts[4];
+            int courseModule = Integer.parseInt(parts[5]);
 
-            Student Studenttoadd = new Student(firstName, lastName, age, courseName, courseModule);
+            Student Studenttoadd = new Student(ID, firstName, lastName, age, courseName, courseModule);
 
             StudentRecordKt.addStudent(Studenttoadd);
         });
@@ -162,6 +172,7 @@ public class TimetableView extends Parent {
                 btn4,
                 btn5,
                 btn6,
+                IDbtn,
                 //btn7,
                 writebtn,
                 Dmenu

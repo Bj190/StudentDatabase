@@ -36,6 +36,9 @@ fun getStudent(): List<Student> {
     return students
 }
 //talk about how originically was it... == it... but this was a direct match only and looked over the assignement brief again and found if it matches a given letter
+fun getID(ID: Int): List<Student> {
+    return students.filter{ it.ID.toString().contains(ID.toString()) }
+}
 fun getfirstNames(firstName: String): List<Student> {
     return students.filter { it.firstName.lowercase().contains(firstName.lowercase()) }
 }

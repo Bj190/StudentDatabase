@@ -8,7 +8,7 @@ import java.nio.file.StandardOpenOption
 
 //need to inisliase record then it codes data properly with group by so it's sperated into String etc then it can be used for inputs and scanners
 // ins -> data/groupby -> instructions to use
-data class Student(val firstName: String, val  lastName: String, val age: Int, val courseName: String, val courseModule: Int)
+data class Student(val ID: Int, val firstName: String, val  lastName: String, val age: Int, val courseName: String, val courseModule: Int)
 fun recordStudent(): MutableList<Student>{
     //This will read the file then if the data is stored correctly will read it and then convert into a record for the software to manipulate
     //@JvmRecord1
@@ -16,7 +16,7 @@ fun recordStudent(): MutableList<Student>{
     val studentLines = Files.readAllLines(file)
     return studentLines.map {line ->
         val tokens = line.replace(" ", "").split(",") //replace line.trim() with line.replace (" ", "") //question if works
-        Student(firstName = tokens[0], lastName = tokens[1], age = tokens[2].toInt(), courseName = tokens[3], courseModule = tokens[4].toInt())
+        Student(ID = tokens[0].toInt(), firstName = tokens[1], lastName = tokens[2], age = tokens[3].toInt(), courseName = tokens[4], courseModule = tokens[5].toInt())
     }.toMutableList(); //this was orignically a list which you can't add to.
 }
 

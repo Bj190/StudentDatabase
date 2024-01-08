@@ -62,6 +62,10 @@ public class TimetableView extends Parent {
                 "Search by Course Module",
                 400, 800
         );
+        var btn7 = new CompoundButton(
+                "Search by both First Name and Last Name",
+                800, 200
+        );
 
         //var sortingBtn = new CompoundButton(
                 //"Sort by age",
@@ -69,14 +73,12 @@ public class TimetableView extends Parent {
         //);
 
         var Dmenu = new Dropdown(
-                "Search By", 800, 50, actions
+                "Search By", 800, 50
         );
-        Runnable getFirstNamesAction = () -> {
-            var btnFNames = textField.getText();
-            var firstNames = StudentRecordKt.getfirstNames(btnFNames);
-            listView.setItems(FXCollections.observableList(firstNames));
-        };
-        actions.put("First Name", getFirstNamesAction);
+        var writebtn = new CompoundButton(
+                "Add new Student", 800, 200
+        );
+
 
 
         //recheck the guidelines for good variable names
@@ -84,6 +86,11 @@ public class TimetableView extends Parent {
         btn.setOnAction(() -> {
             List<Student> students = StudentRecordKt.recordStudent();
             listView.setItems(FXCollections.observableList(StudentRecordKt.getStudent()));
+        });
+        Dmenu.setOnAction(() -> {
+            var DbtnFNames = textField.getText();
+            var DfirstNames = StudentRecordKt.getfirstNames(DbtnFNames);
+            listView.setItems(FXCollections.observableList(DfirstNames));
         });
         //this searches through the first names and returns the record that matches input
         btn2.setOnAction(() -> {
@@ -117,6 +124,27 @@ public class TimetableView extends Parent {
             var courseModule = StudentRecordKt.getCourseModule(btnCModule);
             listView.setItems(FXCollections.observableList(courseModule));
         });
+        btn7.setOnAction(() -> {
+            var btnCNames = btn7.textField.getText().split(" ");
+            var firstName = btnCNames[0];
+            var lastName = btnCNames[1];
+            var combinedNames = StudentRecordKt.getCombinedNames(firstName, lastName);
+            listView.setItems(FXCollections.observableList(combinedNames));
+        });
+        writebtn.setOnAction(() -> {
+            String input = textField.getText();
+
+            String[] parts = input.replace(" ", "").split(",");
+            String firstName = parts[0];
+            String lastName = parts[1];
+            int age = Integer.parseInt(parts[2]);
+            String courseName = parts[3];
+            int courseModule = Integer.parseInt(parts[4]);
+
+            Student Studenttoadd = new Student(firstName, lastName, age, courseName, courseModule);
+
+            StudentRecordKt.addStudent(Studenttoadd);
+        });
        //sortingBtn.setOnAction(() -> {
             //right idea wrong logic
             //listView.getItems().set() //this is not proper. This is a work around It complies a new record but sorted.
@@ -134,6 +162,8 @@ public class TimetableView extends Parent {
                 btn4,
                 btn5,
                 btn6,
+                //btn7,
+                writebtn,
                 Dmenu
                 //sortingBtn
         );
@@ -164,44 +194,35 @@ public class TimetableView extends Parent {
     //this for some reason isn't adding to the stage and javafx application
     //realisation didn't need panel or frame as that creates an enterily different window when i want this added to the stage
     //so reordered code and deleted parts
-    private static class Dropdown extends VBox {
+    private static class Dropdown extends VBox{
         private ComboBox<String> dropdownMenu = new ComboBox<>();
         private Button btn = new Button();
-        private TextField textField;
+        private TextField textField = new TextField();
         String[] options = {"First Name", "Last Name", "Age", "Course Name", "Course Module"};
-        private Map<String, Runnable> actions;
 
 
 
 
-        Dropdown(String name, int x, int y, Map<String, Runnable> actions){
-            this.actions = actions;
+        Dropdown(String name, int x, int y){
+
+
             dropdownMenu.getItems().addAll(options);
-
-
 
             //really not sure on the logic of this one
             //basically needs to check options then depending on which option they choose it needs to run the corresponding function
             //start over basically the runnable needs to be in dropdownMenu but to interact with the listview it needs to be defined as it is in the btns
             // e.g if options is "First Name" then run function getFirstName
-            dropdownMenu.setOnAction((event) -> {
-                String theOption = dropdownMenu.getSelectionModel().getSelectedItem();
-                Runnable action = actions.get(theOption);
-                if (action != null) {
-                    action.run();
-                }
-            });
             btn.setFont(Font.font(34));
             btn.setText(name);
             setTranslateX(x);
             setTranslateY(y);
-
             textField.setFont(Font.font(34));
+
 
             getChildren().addAll(btn, textField,dropdownMenu);
         }
-        interface Action {
-            void run();
+        void setOnAction(Runnable action) {
+            btn.setOnAction(e -> action.run());
         }
 
 

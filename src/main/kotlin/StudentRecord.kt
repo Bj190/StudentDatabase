@@ -8,7 +8,7 @@ import java.nio.file.StandardOpenOption
 
 //need to inisliase record then it codes data properly with group by so it's sperated into String etc then it can be used for inputs and scanners
 // ins -> data/groupby -> instructions to use
-data class Student(val ID: Int, val firstName: String, val  lastName: String, val age: Int, val courseName: String, val courseModule: Int)
+data class Student(val ID: Int, val firstName: String, val  lastName: String, val age: Int, val courseName: String, val courseModule: Int, val Mark: Int)
 fun recordStudent(): MutableList<Student>{
     //This will read the file then if the data is stored correctly will read it and then convert into a record for the software to manipulate
     //@JvmRecord1
@@ -16,7 +16,7 @@ fun recordStudent(): MutableList<Student>{
     val studentLines = Files.readAllLines(file)
     return studentLines.map {line ->
         val tokens = line.replace(" ", "").split(",") //replace line.trim() with line.replace (" ", "") //question if works
-        Student(ID = tokens[0].toInt(), firstName = tokens[1], lastName = tokens[2], age = tokens[3].toInt(), courseName = tokens[4], courseModule = tokens[5].toInt())
+        Student(ID = tokens[0].toInt(), firstName = tokens[1], lastName = tokens[2], age = tokens[3].toInt(), courseName = tokens[4], courseModule = tokens[5].toInt(), Mark = tokens[6].toInt())
     }.toMutableList(); //this was orignically a list which you can't add to.
 }
 
@@ -26,7 +26,7 @@ fun addStudent(newStudent: Student) {
     val students = recordStudent()
     students.add(newStudent)
     val file = Paths.get("StudentDatabase.txt")
-    val studentData = students.joinToString("\n") { "${it.firstName},${it.lastName},${it.age},${it.courseName},${it.courseModule}" }
+    val studentData = students.joinToString("\n") { "${it.ID},${it.firstName},${it.lastName},${it.age},${it.courseName},${it.courseModule},${it.Mark}" }
     Files.write(file, studentData.split("\n"), StandardOpenOption.CREATE, StandardOpenOption.WRITE)
 }
 
@@ -36,6 +36,7 @@ fun getStudent(): List<Student> {
     return students
 }
 //talk about how originically was it... == it... but this was a direct match only and looked over the assignement brief again and found if it matches a given letter
+//Get Functions
 fun getID(ID: Int): List<Student> {
     return students.filter{ it.ID.toString().contains(ID.toString()) }
 }
@@ -55,6 +56,8 @@ fun getCourseName(courseName: String): List<Student>{
 fun getCourseModule(courseModule: Int): List<Student>{
     return students.filter{ it.courseModule.toString().contains(courseModule.toString()) }
 }
+
+//Combined Names //needs testing and debugging does take it both names but doesn't return it
 fun getCombinedNames(firstName: String, lastName: String): List<Student>{
     println("Input first name: $firstName")
     println("Input last name: $lastName")

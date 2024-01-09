@@ -1,20 +1,20 @@
-1, John, Smith, 20, Computer Science, 101
-2, Sarah, Johnson, 21, Mathematics, 201
-3, Michael, Brown, 19, Biology, 301
-4, Emily, Wilson, 22, Computer Science, 101
-5, David, Lee, 20, History, 401
-6, Jessica, Davis, 21, Mathematics, 201
-7, Daniel, Davis, 19, Biology, 301
-8, Olivia, Martinez, 22, Computer Science, 101
-9, James, Rodriguez, 20, History, 401
-10, Emma, Taylor, 21, Mathematics, 201
-11, William, Wilson, 19, Biology, 301
-12, Ava, Harris, 22, Computer Science, 101
-13, Benjamin, Thomas, 20, History, 401
-14, Sophia, White, 21, Mathematics, 201
-15, Christopher, Clark, 19, Biology, 301
-16, Mia, Lewis, 22, Computer Science, 101
-17, Ethan, Walker, 20, History, 401
-18, Isabella, Hall, 21, Mathematics, 201
-19, Joseph, Green, 19, Biology, 301
-20, Charlotte, Baker, 22, Computer Science, 101
+1, John, Smith, 20, Computer Science, 101, 67
+2, Sarah, Johnson, 21, Mathematics, 201, 85
+3, Michael, Brown, 19, Biology, 301, 90
+4, Emily, Wilson, 22, Computer Science, 101, 78
+5, David, Lee, 20, History, 401, 80
+6, Jessica, Davis, 21, Mathematics, 201, 92
+7, Daniel, Davis, 19, Biology, 301, 89
+8, Olivia, Martinez, 22, Computer Science, 101, 75
+9, James, Rodriguez, 20, History, 401, 88
+10, Emma, Taylor, 21, Mathematics, 201, 91
+11, William, Wilson, 19, Biology, 301, 86
+12, Ava, Harris, 22, Computer Science, 101, 76
+13, Benjamin, Thomas, 20, History, 401, 82
+14, Sophia, White, 21, Mathematics, 201, 93
+15, Christopher, Clark, 19, Biology, 301, 87
+16, Mia, Lewis, 22, Computer Science, 101, 79
+17, Ethan, Walker, 20, History, 401, 81
+18, Isabella, Hall, 21, Mathematics, 201, 94
+19, Joseph, Green, 19, Biology, 301, 83
+20, Charlotte, Baker, 22, Computer Science, 101, 77

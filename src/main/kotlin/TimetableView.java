@@ -54,7 +54,7 @@ public class TimetableView extends Parent {
                 800, 200
         );
 
-        var Dmenu = new Choicebox(
+        var CBox = new Choicebox(
                 "Search By", 800, 50
         );
         var writebtn = new CompoundButton(
@@ -64,22 +64,31 @@ public class TimetableView extends Parent {
                 "Search By ID", 400, 950
         );
 
-        var FNAsortbtn = new CompoundButton(
+        var FNsortbtnA = new CompoundButton(
                 "Sort by Ascending Names", 800, 350
         );
-        var FNDsortbtn= new CompoundButton(
+        var FNsortbtnD = new CompoundButton(
                 "Sort by Descending Names", 800, 500
+        );
+        var MarksSortBtnL= new CompoundButton(
+                "Sort by Lowest Marks", 800, 650
+        );
+        var MarksSortBtnH= new CompoundButton(
+                "Sort by Highest Marks", 800, 800
         );
 
 
 
         //recheck the guidelines for good variable names
         //Upon Starting press this button to compile database into a record.
+        //Complie Record Button
         btn.setOnAction(() -> {
             List<Student> students = StudentRecordKt.recordStudent();
             listView.setItems(FXCollections.observableList(StudentRecordKt.getStudent()));
         });
-        Dmenu.setOnAction((selection, input) -> {
+
+        //Choice Box
+        CBox.setOnAction((selection, input) -> {
             switch (selection) {
                 case "ID":
                     var MenuID = StudentRecordKt.getID(Integer.parseInt(input));
@@ -107,6 +116,8 @@ public class TimetableView extends Parent {
                     break;
             }
         });
+        //Get Buttons
+
         //this searches through the first names and returns the record that matches input
         btn2.setOnAction(() -> {
             var btnFNames = btn2.textField.getText();
@@ -145,6 +156,8 @@ public class TimetableView extends Parent {
             var ID = StudentRecordKt.getID(btnID);
             listView.setItems(FXCollections.observableList(ID));
         });
+
+        //This is a combined Search button and function needs further research and testing
         btn7.setOnAction(() -> {
             var btnCNames = btn7.textField.getText().split(" ");
             var firstName = btnCNames[0];
@@ -153,19 +166,34 @@ public class TimetableView extends Parent {
             listView.setItems(FXCollections.observableList(combinedNames));
         });
 
+        //Sorting Buttons
+
         //this sorts through the Firstnames in Ascending order
         //this functionaily works but it still has the textfield so somehow have to remove that so remember to do that
         //this makes a new list instead of sorting the current list need to find out how to make it so it doesn't make a new one but sorts the current list
-        FNAsortbtn.setOnAction(() -> {
+        FNsortbtnA.setOnAction(() -> {
             List<Student> students = new ArrayList<>(listView.getItems());
             students.sort(Comparator.comparing(Student::getFirstName));
             listView.setItems(FXCollections.observableList(students));
         });
-        FNDsortbtn.setOnAction(() -> {
+        FNsortbtnD.setOnAction(() -> {
             List<Student> students = new ArrayList<>(listView.getItems());
             students.sort(Comparator.comparing(Student::getFirstName).reversed());
             listView.setItems(FXCollections.observableList(students));
         });
+        //Sorts marks in ascending order so lowest number first
+        MarksSortBtnL.setOnAction(() -> {
+            List<Student> students = new ArrayList<>(listView.getItems());
+            students.sort(Comparator.comparing(Student:: getMark));
+            listView.setItems(FXCollections.observableList(students));
+        });
+        //Sorts marks in Descending order so highest number first
+        MarksSortBtnH.setOnAction(() -> {
+            List<Student> students = new ArrayList<>(listView.getItems());
+            students.sort(Comparator.comparing(Student:: getMark).reversed());
+            listView.setItems(FXCollections.observableList(students));
+        });
+
 
         writebtn.setOnAction(() -> {
             String input = textField.getText();
@@ -177,8 +205,9 @@ public class TimetableView extends Parent {
             int age = Integer.parseInt(parts[3]);
             String courseName = parts[4];
             int courseModule = Integer.parseInt(parts[5]);
+            int Mark = Integer.parseInt(parts[6]);
 
-            Student Studenttoadd = new Student(ID, firstName, lastName, age, courseName, courseModule);
+            Student Studenttoadd = new Student(ID, firstName, lastName, age, courseName, courseModule, Mark);
 
             StudentRecordKt.addStudent(Studenttoadd);
         });
@@ -192,12 +221,13 @@ public class TimetableView extends Parent {
                 btn5,
                 btn6,
                 IDbtn,
-                FNAsortbtn,
-                FNDsortbtn,
+                FNsortbtnA,
+                FNsortbtnD,
+                MarksSortBtnL,
+                MarksSortBtnH,
                 //btn7,
                 writebtn,
-                Dmenu
-                //sortingBtn
+                CBox
         );
     }
 

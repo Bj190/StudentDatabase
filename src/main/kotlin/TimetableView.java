@@ -80,11 +80,30 @@ public class TimetableView extends Parent {
         });
         Dmenu.setOnAction((selection, input) -> {
             switch (selection) {
-                case "First Name":
-                    var DfirstNames = StudentRecordKt.getfirstNames(input);
-                    listView.setItems(FXCollections.observableList(DfirstNames));
+                case "ID":
+                    var MenuID = StudentRecordKt.getID(Integer.parseInt(input));
+                    listView.setItems(FXCollections.observableList(MenuID));
                     break;
-
+                case "First Name":
+                    var MenufirstNames = StudentRecordKt.getfirstNames(input);
+                    listView.setItems(FXCollections.observableList(MenufirstNames));
+                    break;
+                case "Last Name":
+                    var MenulastNames = StudentRecordKt.getlastNames(input);
+                    listView.setItems(FXCollections.observableList(MenulastNames));
+                    break;
+                case "Age":
+                    var MenuAge = StudentRecordKt.getAge(Integer.parseInt(input));
+                    listView.setItems(FXCollections.observableList(MenuAge));
+                    break;
+                case "Course Name":
+                    var MenuCourseName = StudentRecordKt.getCourseName(input);
+                    listView.setItems(FXCollections.observableList(MenuCourseName));
+                    break;
+                case "Course Module":
+                    var MenuCourseModule = StudentRecordKt.getCourseModule(Integer.parseInt(input));
+                    listView.setItems(FXCollections.observableList(MenuCourseModule));
+                    break;
             }
         });
         //this searches through the first names and returns the record that matches input

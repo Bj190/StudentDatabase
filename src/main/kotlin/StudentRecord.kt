@@ -38,11 +38,11 @@ fun addStudent(newStudent: Student) {
 fun removeStudent(studentToRemove: Student){
     val file = Paths.get("StudentDatabase.txt")
     val lines = Files.readAllLines(file)
-    val students = lines.map { line ->
+    var students = lines.map { line ->
         val parts = line.split(",")
         Student(parts[0].toInt(), parts[1], parts[2], parts[3].toInt(), parts[4], parts[5].toInt(), parts[6].toInt())
     }
-    students.filterNot {it == studentToRemove}
+    students = students.dropWhile { it == studentToRemove }.toMutableList()
     val studentData = students.joinToString("\n") { "${it.ID},${it.firstName},${it.lastName},${it.age},${it.courseName},${it.courseModule},${it.Mark}" }
     Files.write(file, studentData.split("\n"), StandardOpenOption.CREATE, StandardOpenOption.WRITE)
     println("Student removed successfully.")

@@ -3,9 +3,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -55,11 +54,6 @@ public class TimetableView extends Parent {
                 800, 200
         );
 
-        //var sortingBtn = new CompoundButton(
-                //"Sort by age",
-                //400, 0
-        //);
-
         var Dmenu = new Choicebox(
                 "Search By", 800, 50
         );
@@ -68,6 +62,13 @@ public class TimetableView extends Parent {
         );
         var IDbtn = new CompoundButton(
                 "Search By ID", 400, 950
+        );
+
+        var FNAsortbtn = new CompoundButton(
+                "Sort by Ascending Names", 800, 350
+        );
+        var FNDsortbtn= new CompoundButton(
+                "Sort by Descending Names", 800, 500
         );
 
 
@@ -151,6 +152,21 @@ public class TimetableView extends Parent {
             var combinedNames = StudentRecordKt.getCombinedNames(firstName, lastName);
             listView.setItems(FXCollections.observableList(combinedNames));
         });
+
+        //this sorts through the Firstnames in Ascending order
+        //this functionaily works but it still has the textfield so somehow have to remove that so remember to do that
+        //this makes a new list instead of sorting the current list need to find out how to make it so it doesn't make a new one but sorts the current list
+        FNAsortbtn.setOnAction(() -> {
+            List<Student> students = new ArrayList<>(listView.getItems());
+            students.sort(Comparator.comparing(Student::getFirstName));
+            listView.setItems(FXCollections.observableList(students));
+        });
+        FNDsortbtn.setOnAction(() -> {
+            List<Student> students = new ArrayList<>(listView.getItems());
+            students.sort(Comparator.comparing(Student::getFirstName).reversed());
+            listView.setItems(FXCollections.observableList(students));
+        });
+
         writebtn.setOnAction(() -> {
             String input = textField.getText();
 
@@ -166,14 +182,6 @@ public class TimetableView extends Parent {
 
             StudentRecordKt.addStudent(Studenttoadd);
         });
-       //sortingBtn.setOnAction(() -> {
-            //right idea wrong logic
-            //listView.getItems().set() //this is not proper. This is a work around It complies a new record but sorted.
-            //first step
-            //This needs to sort by age(oldest to youngest)
-            //prerequists: record needs to be complied. ListView must contain entries.
-        //});
-
 
         getChildren().addAll(
                 listView,
@@ -184,6 +192,8 @@ public class TimetableView extends Parent {
                 btn5,
                 btn6,
                 IDbtn,
+                FNAsortbtn,
+                FNDsortbtn,
                 //btn7,
                 writebtn,
                 Dmenu

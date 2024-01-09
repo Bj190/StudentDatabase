@@ -231,7 +231,7 @@ public class TimetableView extends Parent {
         });
         //Remove Button
         Removebtn.setOnAction(() -> {
-            System.out.println("Button clicked"); // Debugging statement
+            System.out.println("Button clicked"); // Debug
 
             String input = Removebtn.textField.getText().trim();
             System.out.println("Input: " + input);
@@ -241,9 +241,6 @@ public class TimetableView extends Parent {
                 System.out.println("Invalid Input");
                 return;
             }
-
-            System.out.println("Parsing input..."); // Debugging statement
-
             int ID = Integer.parseInt(parts[0]);
             String firstName = parts[1];
             String lastName = parts[2];
@@ -254,10 +251,7 @@ public class TimetableView extends Parent {
 
             Student StudentToBeRemoved = new Student(ID, firstName, lastName, age, courseName, courseModule, mark);
             System.out.println("Student to be removed " + StudentToBeRemoved);
-
-            System.out.println("Removing student..."); // Debugging statement
-                StudentRecordKt.removeStudent(StudentToBeRemoved);
-                System.out.println("Student was removed.");
+            StudentRecordKt.removeStudent(StudentToBeRemoved);
         });
 
         //Adding Buttons

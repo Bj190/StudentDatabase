@@ -17,4 +17,3 @@
 17,Ethan,Walker,20,History,401,81
 18,Isabella,Hall,21,Mathematics,201,94
 19,Joseph,Green,19,Biology,301,83
-20,Charlotte,Baker,22,ComputerScience,101,77

@@ -1,25 +1,13 @@
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Orientation;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 // @Author Bryn Jones 2023
 // Version 1.0
@@ -72,7 +60,7 @@ public class TimetableView extends Parent {
                 //400, 0
         //);
 
-        var Dmenu = new Dropdown(
+        var Dmenu = new Choicebox(
                 "Search By", 800, 50
         );
         var writebtn = new CompoundButton(
@@ -90,10 +78,14 @@ public class TimetableView extends Parent {
             List<Student> students = StudentRecordKt.recordStudent();
             listView.setItems(FXCollections.observableList(StudentRecordKt.getStudent()));
         });
-        Dmenu.setOnAction(() -> {
-            var DbtnFNames = textField.getText();
-            var DfirstNames = StudentRecordKt.getfirstNames(DbtnFNames);
-            listView.setItems(FXCollections.observableList(DfirstNames));
+        Dmenu.setOnAction((selection, input) -> {
+            switch (selection) {
+                case "First Name":
+                    var DfirstNames = StudentRecordKt.getfirstNames(input);
+                    listView.setItems(FXCollections.observableList(DfirstNames));
+                    break;
+
+            }
         });
         //this searches through the first names and returns the record that matches input
         btn2.setOnAction(() -> {
@@ -205,38 +197,33 @@ public class TimetableView extends Parent {
     //this for some reason isn't adding to the stage and javafx application
     //realisation didn't need panel or frame as that creates an enterily different window when i want this added to the stage
     //so reordered code and deleted parts
-    private static class Dropdown extends VBox{
-        private ComboBox<String> dropdownMenu = new ComboBox<>();
+    private static class Choicebox extends VBox {
         private Button btn = new Button();
+        private ChoiceBox<String> ChoiceMenu = new ChoiceBox<>();
         private TextField textField = new TextField();
         String[] options = {"First Name", "Last Name", "Age", "Course Name", "Course Module"};
 
-
-
-
-        Dropdown(String name, int x, int y){
-
-
-            dropdownMenu.getItems().addAll(options);
-
-            //really not sure on the logic of this one
-            //basically needs to check options then depending on which option they choose it needs to run the corresponding function
-            //start over basically the runnable needs to be in dropdownMenu but to interact with the listview it needs to be defined as it is in the btns
-            // e.g if options is "First Name" then run function getFirstName
+        Choicebox(String name, int x, int y) {
             btn.setFont(Font.font(34));
             btn.setText(name);
+            ChoiceMenu.getItems().addAll(options);
             setTranslateX(x);
             setTranslateY(y);
             textField.setFont(Font.font(34));
 
-
-            getChildren().addAll(btn, textField,dropdownMenu);
+            getChildren().addAll(btn, textField, ChoiceMenu);
         }
-        void setOnAction(Runnable action) {
-            btn.setOnAction(e -> action.run());
+        //BiConsumer from lectures
+        //put references and logic in this later
+        void setOnAction(BiConsumer<String, String> action) {
+            btn.setOnAction(e -> {
+                String selection = ChoiceMenu.getValue();
+                String input = textField.getText();
+                if (selection != null && input != null) {
+                    action.accept(selection, input);
+                }
+            });
         }
-
-
     }
 
 }

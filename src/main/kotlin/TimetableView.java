@@ -51,7 +51,7 @@ public class TimetableView extends Parent {
         );
         var btn7 = new CompoundButton(
                 "Search by both First Name and Last Name",
-                800, 200
+                400, 950
         );
 
         var CBox = new Choicebox(
@@ -159,11 +159,16 @@ public class TimetableView extends Parent {
 
         //This is a combined Search button and function needs further research and testing
         btn7.setOnAction(() -> {
-            var btnCNames = btn7.textField.getText().split(" ");
+            var btnCNames = btn7.textField.getText().replace(" ", "").split(",");
             var firstName = btnCNames[0];
             var lastName = btnCNames[1];
             var combinedNames = StudentRecordKt.getCombinedNames(firstName, lastName);
-            listView.setItems(FXCollections.observableList(combinedNames));
+
+            if (combinedNames.isEmpty()) {
+                System.out.println("No students found with the provided first name and last name.");
+            } else {
+                listView.setItems(FXCollections.observableList(combinedNames));
+            }
         });
 
         //Sorting Buttons
@@ -225,7 +230,7 @@ public class TimetableView extends Parent {
                 FNsortbtnD,
                 MarksSortBtnL,
                 MarksSortBtnH,
-                //btn7,
+                btn7,
                 writebtn,
                 CBox
         );

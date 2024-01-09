@@ -14,6 +14,7 @@ fun recordStudent(): MutableList<Student>{
     //@JvmRecord1
     val file = Paths.get("StudentDatabase.txt")
     val studentLines = Files.readAllLines(file)
+
     return studentLines.map {line ->
         val tokens = line.replace(" ", "").split(",") //replace line.trim() with line.replace (" ", "") //question if works
         Student(ID = tokens[0].toInt(), firstName = tokens[1], lastName = tokens[2], age = tokens[3].toInt(), courseName = tokens[4], courseModule = tokens[5].toInt(), Mark = tokens[6].toInt())
@@ -58,16 +59,21 @@ fun getCourseModule(courseModule: Int): List<Student>{
 }
 
 //Combined Names //needs testing and debugging does take it both names but doesn't return it
+//This takes in two inputs like first name and last name and then will find anything similar to the input
 fun getCombinedNames(firstName: String, lastName: String): List<Student>{
-    println("Input first name: $firstName")
-    println("Input last name: $lastName")
+    val NewFirstName = firstName.trim()
+    val NewLastName = lastName.trim()
+    //debugging
+    println("Input first name: $NewFirstName")
+    println("Input last name: $NewLastName")
 
     for (student in students) {
         println("Student first name: ${student.firstName}")
         println("Student last name: ${student.lastName}")
     }
-    return students.filter{it.firstName.lowercase().replaceFirstChar {firstName.uppercase()} == firstName && it.lastName.lowercase().replaceFirstChar {lastName.uppercase()} == lastName}; //bipedicate
+    val CombinedStudents = students.filter{it.firstName.contains(NewFirstName) && it.lastName.contains(NewLastName)}
+    println("Filtered ${CombinedStudents.size} students")
+    return CombinedStudents;
 }
-
 
 

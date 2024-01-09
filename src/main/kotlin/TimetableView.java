@@ -159,14 +159,16 @@ public class TimetableView extends Parent {
 
         //This is a combined Search button and function needs further research and testing
         btn7.setOnAction(() -> {
-            var btnCNames = btn7.textField.getText().replace(" ", "").split(",");
+            var btnCNames = btn7.textField.getText().split(" ");
             var firstName = btnCNames[0];
             var lastName = btnCNames[1];
+            System.out.println("Before calling getCombinedNames: firstName=$firstName, lastName=$lastName");
             var combinedNames = StudentRecordKt.getCombinedNames(firstName, lastName);
 
             if (combinedNames.isEmpty()) {
                 System.out.println("No students found with the provided first name and last name.");
             } else {
+                System.out.println("Found ${combinedNames.size} students with the provided first name and last name.");
                 listView.setItems(FXCollections.observableList(combinedNames));
             }
         });

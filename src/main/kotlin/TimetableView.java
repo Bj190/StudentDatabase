@@ -76,6 +76,9 @@ public class TimetableView extends Parent {
         var MarksSortBtnH= new CompoundButton(
                 "Sort by Highest Marks", 800, 800
         );
+        var Removebtn = new CompoundButton(
+                "Remove Student", 400, 1100
+        );
 
 
 
@@ -226,7 +229,33 @@ public class TimetableView extends Parent {
             StudentRecordKt.addStudent(studentToAdd);
             System.out.println("Student was added.");
         });
+        //Remove Button
+        Removebtn.setOnAction(() -> {
+            String input = Removebtn.textField.getText().trim();
+            System.out.println("Input: " + input);
 
+            String[] parts = input.replace(" ", "").split(",");
+            if (parts.length != 7 || parts[0].isEmpty() || parts[1].isEmpty() || parts[2].isEmpty() || parts[3].isEmpty() || parts[4].isEmpty() || parts[5].isEmpty() || parts[6].isEmpty()) {
+                System.out.println("Invalid Input");
+                return;
+            }
+            int ID = Integer.parseInt(parts[0]);
+            String firstName = parts[1];
+            String lastName = parts[2];
+            int age = Integer.parseInt(parts[3]);
+            String courseName = parts[4];
+            int courseModule = Integer.parseInt(parts[5]);
+            int mark = Integer.parseInt(parts[6]);
+
+            Student StudentToBeRemoved = new Student(ID, firstName, lastName, age, courseName, courseModule, mark);
+            System.out.println("Student to be removed " + StudentToBeRemoved);
+
+            StudentRecordKt.removeStudent(StudentToBeRemoved);
+            System.out.println("Student was removed.");
+
+        });
+
+        //Adding Buttons
         getChildren().addAll(
                 listView,
                 btn,
@@ -240,6 +269,7 @@ public class TimetableView extends Parent {
                 FNsortbtnD,
                 MarksSortBtnL,
                 MarksSortBtnH,
+                Removebtn,
                 btn7,
                 writebtn,
                 CBox

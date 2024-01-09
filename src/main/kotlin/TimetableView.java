@@ -200,23 +200,31 @@ public class TimetableView extends Parent {
             students.sort(Comparator.comparing(Student:: getMark).reversed());
             listView.setItems(FXCollections.observableList(students));
         });
-
-
+        //Write Button.
+        //To be tidied up and finished
+        //this writes to file but it's not showing up in the tableview when you reload it?
         writebtn.setOnAction(() -> {
-            String input = textField.getText();
+            String input = writebtn.textField.getText().trim();
+            System.out.println("Input: " + input);
 
             String[] parts = input.replace(" ", "").split(",");
+            if (parts.length != 7 || parts[0].isEmpty() || parts[1].isEmpty() || parts[2].isEmpty() || parts[3].isEmpty() || parts[4].isEmpty() || parts[5].isEmpty() || parts[6].isEmpty()) {
+                System.out.println("Invalid Input");
+                return;
+            }
             int ID = Integer.parseInt(parts[0]);
             String firstName = parts[1];
             String lastName = parts[2];
             int age = Integer.parseInt(parts[3]);
             String courseName = parts[4];
             int courseModule = Integer.parseInt(parts[5]);
-            int Mark = Integer.parseInt(parts[6]);
+            int mark = Integer.parseInt(parts[6]);
 
-            Student Studenttoadd = new Student(ID, firstName, lastName, age, courseName, courseModule, Mark);
+            Student studentToAdd = new Student(ID, firstName, lastName, age, courseName, courseModule, mark);
+            System.out.println("Student to be added " + studentToAdd);
 
-            StudentRecordKt.addStudent(Studenttoadd);
+            StudentRecordKt.addStudent(studentToAdd);
+            System.out.println("Student was added.");
         });
 
         getChildren().addAll(

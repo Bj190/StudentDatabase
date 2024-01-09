@@ -14,7 +14,8 @@ fun recordStudent(): MutableList<Student>{
     //@JvmRecord1
     val file = Paths.get("StudentDatabase.txt")
     val studentLines = Files.readAllLines(file)
-
+    println("File content:")
+    studentLines.forEach { println(it) }
     return studentLines.map {line ->
         val tokens = line.replace(" ", "").split(",") //replace line.trim() with line.replace (" ", "") //question if works
         Student(ID = tokens[0].toInt(), firstName = tokens[1], lastName = tokens[2], age = tokens[3].toInt(), courseName = tokens[4], courseModule = tokens[5].toInt(), Mark = tokens[6].toInt())
@@ -24,11 +25,14 @@ fun recordStudent(): MutableList<Student>{
 var students: List<Student> = emptyList()
 //Add student needs to take in the same info as a Student data class have the current record open and then write that into the file.
 fun addStudent(newStudent: Student) {
+    println("Adding student: $newStudent")
     val students = recordStudent()
     students.add(newStudent)
     val file = Paths.get("StudentDatabase.txt")
     val studentData = students.joinToString("\n") { "${it.ID},${it.firstName},${it.lastName},${it.age},${it.courseName},${it.courseModule},${it.Mark}" }
+    println("Writing data to file: $studentData")
     Files.write(file, studentData.split("\n"), StandardOpenOption.CREATE, StandardOpenOption.WRITE)
+    println("Student added successfully.")
 }
 
 

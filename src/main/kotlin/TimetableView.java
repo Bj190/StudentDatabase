@@ -261,13 +261,6 @@ public class TimetableView extends Parent {
         //Adding Buttons
         getChildren().addAll(
                 listView,
-                btn,
-                btn2,
-                btn3,
-                btn4,
-                btn5,
-                btn6,
-                IDbtn,
                 FNsortbtnA,
                 FNsortbtnD,
                 MarksSortBtnL,

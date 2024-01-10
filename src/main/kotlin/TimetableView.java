@@ -24,48 +24,30 @@ public class TimetableView extends Parent {
         Map<String,Runnable> actions = new HashMap<>();
         TextField textField = new TextField();
 
-
+        //Creating Record
         var btn = new CompoundButton(
                 "Compile Records",
                 400, 50
-                );
-        var btn2 = new CompoundButton(
-                "Search by First Names",
-                400, 200
         );
-        var btn3 = new CompoundButton(
-                "Search by Last Names",
-                400, 350
-        );
-        var btn4 = new CompoundButton(
-                "Search by Age",
-                400, 500
-        );
-        var btn5 = new CompoundButton(
-                "Search by Course Name",
-                400, 650
-        );
-        var btn6 = new CompoundButton(
-                "Search by Course Module",
-                400, 800
-        );
+        //Combined Search
         var btn7 = new CompoundButton(
                 "Search by both First Name and Last Name",
                 400, 950
         );
-
+        //Choice Box for searches
         var CBox = new Choicebox(
-                "Search By", 800, 50
+                "Search By", 350, 50
         );
+        //Add and Remove
         var writebtn = new CompoundButton(
-                "Add new Student", 800, 200
+                "Add new Student", 800, 50
         );
-        var IDbtn = new CompoundButton(
-                "Search By ID", 400, 950
+        var Removebtn = new CompoundButton(
+                "Remove Student", 800, 200
         );
-
-        var FNsortbtnA = new CompoundButton(
-                "Sort by Ascending Names", 800, 350
+        //Sorting
+        var FNsortbtnA = new (
+                "Sort by Ascending Names", 350, 200
         );
         var FNsortbtnD = new CompoundButton(
                 "Sort by Descending Names", 800, 500
@@ -75,9 +57,6 @@ public class TimetableView extends Parent {
         );
         var MarksSortBtnH= new CompoundButton(
                 "Sort by Highest Marks", 800, 800
-        );
-        var Removebtn = new CompoundButton(
-                "Remove Student", 400, 1100
         );
 
 
@@ -123,47 +102,7 @@ public class TimetableView extends Parent {
                     break;
             }
         });
-        //Get Buttons
-
-        //this searches through the first names and returns the record that matches input
-        btn2.setOnAction(() -> {
-            var btnFNames = btn2.textField.getText();
-            var firstNames = StudentRecordKt.getfirstNames(btnFNames);
-        listView.setItems(FXCollections.observableList(firstNames));
-        });
-
-        //this searches through the last names and returns the record that matches input
-        btn3.setOnAction(() -> {
-            var btnLNames = btn3.textField.getText();
-            var lastNames = StudentRecordKt.getlastNames(btnLNames);
-            listView.setItems(FXCollections.observableList(lastNames));
-        });
-        //this searches through the ages and returns the record that matches input
-        //Some way to only allow ints to be accepted?
-        btn4.setOnAction(() -> {
-            var btnAge = Integer.parseInt(btn4.textField.getText()); //Int Expected
-            var ages = StudentRecordKt.getAge(btnAge);
-            listView.setItems(FXCollections.observableList(ages));
-        });
-        //this searches through the course names and returns the record that matches input
-        btn5.setOnAction(() -> {
-            var btnCName = btn5.textField.getText();
-            var courseName = StudentRecordKt.getCourseName(btnCName);
-            listView.setItems(FXCollections.observableList(courseName));
-        });
-        //this searches through the course module number and returns the record that matches input
-        btn6.setOnAction(() -> {
-            var btnCModule = Integer.parseInt(btn6.textField.getText()); //Int Expected
-            var courseModule = StudentRecordKt.getCourseModule(btnCModule);
-            listView.setItems(FXCollections.observableList(courseModule));
-        });
-        //This searches through the IDs and returns matches
-        IDbtn.setOnAction(() -> {
-            var btnID = Integer.parseInt(IDbtn.textField.getText()); //Int Expected
-            var ID = StudentRecordKt.getID(btnID);
-            listView.setItems(FXCollections.observableList(ID));
-        });
-
+        //Get Combined Names
         //This is a combined Search button and function needs further research and testing
         btn7.setOnAction(() -> {
             var btnCNames = btn7.textField.getText().split(" ");

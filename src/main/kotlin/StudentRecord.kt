@@ -81,6 +81,9 @@ fun getCourseName(courseName: String): List<Student>{
 fun getCourseModule(courseModule: Int): List<Student>{
     return students.filter{ it.courseModule.toString().contains(courseModule.toString()) }
 }
+fun getMark(Mark: Int): List<Student> {
+    return students.filter{ it.Mark.toString().contains(Mark.toString()) }
+}
 
 //Combined Names //needs testing and debugging does take it both names but doesn't return it
 //This takes in two inputs like first name and last name and then will find anything similar to the input

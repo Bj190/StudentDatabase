@@ -117,6 +117,10 @@ public class TimetableView extends Parent {
                     var MenuCourseModule = StudentRecordKt.getCourseModule(Integer.parseInt(input));
                     listView.setItems(FXCollections.observableList(MenuCourseModule));
                     break;
+                case "Marks":
+                    var MenuMarks = StudentRecordKt.getMark(Integer.parseInt(input));
+                    listView.setItems(FXCollections.observableList(MenuMarks));
+                    break;
             }
         });
         //Get Buttons
@@ -304,7 +308,7 @@ public class TimetableView extends Parent {
         private Button btn = new Button();
         private ChoiceBox<String> ChoiceMenu = new ChoiceBox<>();
         private TextField textField = new TextField();
-        String[] options = {"First Name", "Last Name", "Age", "Course Name", "Course Module"};
+        String[] options = {"ID","First Name", "Last Name", "Age", "Course Name", "Course Module","Marks"};
 
         Choicebox(String name, int x, int y) {
             btn.setFont(Font.font(34));

@@ -64,16 +64,16 @@ public class TimetableView extends Parent {
                 "Search By ID", 400, 950
         );
 
-        var FNsortbtnA = new CompoundButton(
+        var FNsortbtnA = new TextlessButton(
                 "Sort by Ascending Names", 800, 350
         );
-        var FNsortbtnD = new CompoundButton(
+        var FNsortbtnD = new TextlessButton(
                 "Sort by Descending Names", 800, 500
         );
-        var MarksSortBtnL= new CompoundButton(
+        var MarksSortBtnL= new TextlessButton(
                 "Sort by Lowest Marks", 800, 650
         );
-        var MarksSortBtnH= new CompoundButton(
+        var MarksSortBtnH= new TextlessButton(
                 "Sort by Highest Marks", 800, 800
         );
         var Removebtn = new CompoundButton(
@@ -293,6 +293,25 @@ public class TimetableView extends Parent {
             setTranslateY(y);
 
             getChildren().addAll(btn, textField);
+        }
+
+        void setOnAction(Runnable action) {
+            btn.setOnAction(e -> action.run());
+        }
+    }
+
+    private static class TextlessButton extends VBox {
+        private Button btn = new Button();
+
+        TextlessButton(String name, int x, int y) {
+            btn.setFont(Font.font(34));
+            btn.setText(name);
+
+
+            setTranslateX(x);
+            setTranslateY(y);
+
+            getChildren().addAll(btn);
         }
 
         void setOnAction(Runnable action) {

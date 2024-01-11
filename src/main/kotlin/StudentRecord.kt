@@ -102,5 +102,20 @@ fun getCombinedNames(firstName: String, lastName: String): List<Student>{
     println("Filtered ${CombinedStudents.size} students")
     return CombinedStudents;
 }
+fun getCourseNames(firstName: String, courseName: String): List<Student>{
+    val NewFirstName = firstName.trim()
+    val NewCourseName = courseName.trim()
+    //debugging
+    println("Input first name: $NewFirstName")
+    println("Input last name: $NewCourseName")
+
+    for (student in students) {
+        println("Student first name: ${student.firstName}")
+        println("Student last name: ${student.lastName}")
+    }
+    val CombinedStudents = students.filter{it.firstName.contains(NewFirstName) && it.courseName.contains(NewCourseName)}
+    println("Filtered ${CombinedStudents.size} students")
+    return CombinedStudents;
+}
 
 

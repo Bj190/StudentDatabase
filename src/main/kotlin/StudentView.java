@@ -6,19 +6,18 @@ import javafx.scene.text.Font;
 
 import java.util.*;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 // @Author Bryn Jones 2023
 // Version 1.0
 
 
-public class TimetableView extends Parent {
+public class StudentView extends Parent {
 
 
     private final ListView<Student> listView = new ListView<>();
 
 
-    public TimetableView() {
+    public StudentView() {
 
         listView.setPrefSize(300, 600);
         Map<String,Runnable> actions = new HashMap<>();

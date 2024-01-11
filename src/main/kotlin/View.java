@@ -8,12 +8,11 @@ import javafx.scene.control.ScrollPane;
 // @Author Bryn Jones 2023
 // Version 1.0
 
-import java.awt.*;
 
 public class View extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        var view = new TimetableView();
+        var view = new StudentView();
         Rectangle2D screen = Screen.getPrimary().getVisualBounds(); //new
         ScrollPane sp = new ScrollPane(); //not sure how this works yet further research is supposed to make the stage scrollable
         sp.setContent(view);

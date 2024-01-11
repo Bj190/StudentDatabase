@@ -24,22 +24,13 @@ public class StudentView extends Parent {
         TextField textField = new TextField();
 
         //Creating Record
-        var btn = new CompoundButton(
+        var Recordbtn = new CompoundButton(
                 "Compile Records",
-                400, 50
-        );
-        //Combined Search
-        var CombinedNamesbtn = new CompoundButton(
-                "Search by both First Name and Last Name",
-                400, 950
-        );
-        var CourseFirstNamebtn = new CompoundButton(
-                "Search by both First Name and Last Name",
-                400, 950
+                350, 45
         );
         //Choice Box for searches
         var CBox = new Choicebox(
-                "Search By", 350, 50
+                "Search By", 350, 200
         );
         //Add and Remove
         var writebtn = new CompoundButton(
@@ -48,18 +39,28 @@ public class StudentView extends Parent {
         var Removebtn = new CompoundButton(
                 "Remove Student", 800, 200
         );
+
+        //Combined Search
+        var CombinedNamesbtn = new CompoundButton(
+                "Search by both First Name and Last Name",
+                800, 350
+        );
+        var CourseFirstNamebtn = new CompoundButton(
+                "Search by both First Name and Course Name",
+                800, 500
+        );
         //Sorting
         var FNsortbtnA = new TextlessButton(
-                "Sort by Ascending Names", 350, 200
+                "Sort by Ascending Names", 350, 400
         );
         var FNsortbtnD = new TextlessButton(
-                "Sort by Descending Names", 800, 500
+                "Sort by Descending Names", 350, 500
         );
         var MarksSortBtnL= new TextlessButton(
-                "Sort by Lowest Marks", 800, 650
+                "Sort by Lowest Marks", 350, 600
         );
         var MarksSortBtnH= new TextlessButton(
-                "Sort by Highest Marks", 800, 800
+                "Sort by Highest Marks", 350, 700
         );
 
 
@@ -67,7 +68,7 @@ public class StudentView extends Parent {
         //recheck the guidelines for good variable names
         //Upon Starting press this button to compile database into a record.
         //Complie Record Button
-        btn.setOnAction(() -> {
+        Recordbtn.setOnAction(() -> {
             List<Student> students = StudentRecordKt.recordStudent();
             listView.setItems(FXCollections.observableList(StudentRecordKt.getStudent()));
         });
@@ -213,6 +214,7 @@ public class StudentView extends Parent {
         //Adding Buttons
         getChildren().addAll(
                 listView,
+                Recordbtn,
                 FNsortbtnA,
                 FNsortbtnD,
                 MarksSortBtnL,

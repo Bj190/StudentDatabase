@@ -111,28 +111,24 @@ public class StudentView extends Parent {
             var btnCNames = CombinedNamesbtn.textField.getText().split(" ");
             var firstName = btnCNames[0];
             var lastName = btnCNames[1];
-            System.out.println("Before calling getCombinedNames: firstName=$firstName, lastName=$lastName");
             var combinedNames = StudentRecordKt.getCombinedNames(firstName, lastName);
 
             if (combinedNames.isEmpty()) {
-                System.out.println("No students found with the provided first name and last name.");
+                System.out.println("No students found with the provided details.");
             } else {
-                System.out.println("Found ${combinedNames.size} students with the provided first name and last name.");
                 listView.setItems(FXCollections.observableList(combinedNames));
             }
         });
         CourseFirstNamebtn.setOnAction(() -> {
             var btnCNames = CourseFirstNamebtn.textField.getText().split(" ");
             var firstName = btnCNames[0];
-            var lastName = btnCNames[1];
-            System.out.println("Before calling getCombinedNames: firstName=$firstName, lastName=$lastName");
-            var combinedNames = StudentRecordKt.getCombinedNames(firstName, lastName);
+            var courseName = btnCNames[1];
+            var CourseFirstName = StudentRecordKt.getCourseNames(firstName, courseName);
 
-            if (combinedNames.isEmpty()) {
-                System.out.println("No students found with the provided first name and last name.");
+            if (CourseFirstName.isEmpty()) {
+                System.out.println("No students found with the provided details.");
             } else {
-                System.out.println("Found ${combinedNames.size} students with the provided first name and last name.");
-                listView.setItems(FXCollections.observableList(combinedNames));
+                listView.setItems(FXCollections.observableList(CourseFirstName));
             }
         });
 

@@ -275,7 +275,7 @@ public class StudentView extends Parent {
         private ChoiceBox<String> ChoiceMenu = new ChoiceBox<>();
         private TextField textField = new TextField();
         String[] options = {"ID","First Name", "Last Name", "Age", "Course Name", "Course Module","Marks"};
-
+        //Reusing of CompoundButton
         Choicebox(String name, int x, int y) {
             btn.setFont(Font.font(34));
             btn.setText(name);
@@ -286,8 +286,7 @@ public class StudentView extends Parent {
 
             getChildren().addAll(btn, textField, ChoiceMenu);
         }
-        //BiConsumer from lectures
-        //put references and logic in this later
+        //BiConsumer
         void setOnAction(BiConsumer<String, String> action) {
             btn.setOnAction(e -> {
                 String selection = ChoiceMenu.getValue();

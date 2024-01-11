@@ -29,7 +29,11 @@ public class StudentView extends Parent {
                 400, 50
         );
         //Combined Search
-        var btn7 = new CompoundButton(
+        var CombinedNamesbtn = new CompoundButton(
+                "Search by both First Name and Last Name",
+                400, 950
+        );
+        var CourseFirstNamebtn = new CompoundButton(
                 "Search by both First Name and Last Name",
                 400, 950
         );
@@ -45,16 +49,16 @@ public class StudentView extends Parent {
                 "Remove Student", 800, 200
         );
         //Sorting
-        var FNsortbtnA = new (
+        var FNsortbtnA = new TextlessButton(
                 "Sort by Ascending Names", 350, 200
         );
-        var FNsortbtnD = new CompoundButton(
+        var FNsortbtnD = new TextlessButton(
                 "Sort by Descending Names", 800, 500
         );
-        var MarksSortBtnL= new CompoundButton(
+        var MarksSortBtnL= new TextlessButton(
                 "Sort by Lowest Marks", 800, 650
         );
-        var MarksSortBtnH= new CompoundButton(
+        var MarksSortBtnH= new TextlessButton(
                 "Sort by Highest Marks", 800, 800
         );
 
@@ -103,8 +107,22 @@ public class StudentView extends Parent {
         });
         //Get Combined Names
         //This is a combined Search button and function needs further research and testing
-        btn7.setOnAction(() -> {
-            var btnCNames = btn7.textField.getText().split(" ");
+        CombinedNamesbtn.setOnAction(() -> {
+            var btnCNames = CombinedNamesbtn.textField.getText().split(" ");
+            var firstName = btnCNames[0];
+            var lastName = btnCNames[1];
+            System.out.println("Before calling getCombinedNames: firstName=$firstName, lastName=$lastName");
+            var combinedNames = StudentRecordKt.getCombinedNames(firstName, lastName);
+
+            if (combinedNames.isEmpty()) {
+                System.out.println("No students found with the provided first name and last name.");
+            } else {
+                System.out.println("Found ${combinedNames.size} students with the provided first name and last name.");
+                listView.setItems(FXCollections.observableList(combinedNames));
+            }
+        });
+        CourseFirstNamebtn.setOnAction(() -> {
+            var btnCNames = CourseFirstNamebtn.textField.getText().split(" ");
             var firstName = btnCNames[0];
             var lastName = btnCNames[1];
             System.out.println("Before calling getCombinedNames: firstName=$firstName, lastName=$lastName");
@@ -204,7 +222,8 @@ public class StudentView extends Parent {
                 MarksSortBtnL,
                 MarksSortBtnH,
                 Removebtn,
-                btn7,
+                CombinedNamesbtn,
+                CourseFirstNamebtn,
                 writebtn,
                 CBox
         );
@@ -224,6 +243,24 @@ public class StudentView extends Parent {
             setTranslateY(y);
 
             getChildren().addAll(btn, textField);
+        }
+
+        void setOnAction(Runnable action) {
+            btn.setOnAction(e -> action.run());
+        }
+    }
+    private static class TextlessButton extends VBox {
+        private Button btn = new Button();
+
+        TextlessButton(String name, int x, int y) {
+            btn.setFont(Font.font(34));
+            btn.setText(name);
+
+
+            setTranslateX(x);
+            setTranslateY(y);
+
+            getChildren().addAll(btn);
         }
 
         void setOnAction(Runnable action) {
